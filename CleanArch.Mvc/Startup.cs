@@ -37,7 +37,7 @@ namespace CleanArch.Mvc
                     Configuration.GetConnectionString("UniversityIdentityDbConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddRazorPages();
+            services.AddControllersWithViews();
 
             RegisterServices(services);
         }
@@ -67,7 +67,9 @@ namespace CleanArch.Mvc
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
 

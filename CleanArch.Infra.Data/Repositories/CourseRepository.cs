@@ -20,5 +20,11 @@ namespace CleanArch.Infra.Data.Repositories
         {
             return _context.Courses; // Ideally: try, catch, log, and throw.
         }
+
+        public void Add(Course course)
+        {
+            _context.Courses.Add(course);
+            _context.SaveChanges();
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace CleanArch.Mvc
         {
             services.AddDbContext<UniversityDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("UniversityDbConnection")));
+                    Configuration.GetConnectionString("UniversityDbConnection"))); // Inderict reference via IoC project
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("UniversityIdentityDbConnection")));

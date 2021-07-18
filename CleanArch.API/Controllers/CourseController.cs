@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CleanArch.Application.Interfaces;
+using CleanArch.Application.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,16 +13,22 @@ namespace CleanArch.API.Controllers
     [Route("api/[controller]")]
     public class CourseController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly ICourseService _courseService;
 
         private readonly ILogger<CourseController> _logger;
 
-        public CourseController(ILogger<CourseController> logger)
+        public CourseController(ICourseService courseService,ILogger<CourseController> logger)
         {
+            _courseService = courseService;
             _logger = logger;
+        }
+
+        [HttpPost]
+        [Route("")]
+        public IActionResult Create([FromBody] CourseViewModel courseViewModel)
+        {
+            _courseService.Create(courseViewModel);
+            return Ok(courseViewModel);
         }
     }
 }
